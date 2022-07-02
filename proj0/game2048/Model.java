@@ -111,6 +111,7 @@ public class Model extends Observable {
 
         // TODO: Fill in this function.
 
+
         checkGameOver();
         if (changed) {
             setChanged();
@@ -174,10 +175,9 @@ public class Model extends Observable {
         if(emptySpaceExists(b)) return true;
         for(int i = 0; i < b.size(); i ++ ) {
             for(int j = 0; j < b.size(); j ++ ) {
-                if(i + 1 < b.size() && b.tile(i, j).value() == b.tile(i + 1, j).value()) {
-                    return true;
-                }
-                if(j + 1 < b.size() && b.tile(i, j).value() == b.tile(i, j + 1).value()) {
+                boolean leftOrRight = j + 1 < b.size() && b.tile(i, j).value() == b.tile(i, j + 1).value();
+                boolean upOrDown = i + 1 < b.size() && b.tile(i, j).value() == b.tile(i + 1, j).value();
+                if(leftOrRight || upOrDown) {
                     return true;
                 }
             }
