@@ -110,7 +110,26 @@ public class Model extends Observable {
         changed = false;
 
         // TODO: Fill in this function.
-
+        // set the viewing perspective to make the operations more convenient
+        _board.setViewingPerspective(side);
+        int size = _board.size();
+        for (int col = 0; col < size; col ++ ) {
+            // move all the tiles to make them adjacent
+            for (int row = size - 1; row >= 0; row -- ) {
+                Tile tile = _board.tile(col, row);
+                if(tile == null) continue;
+                int nextPos = 3;
+                while(nextPos >= row) {
+                    if(_board.tile(col, nextPos) == null) {
+                        break;
+                    }
+                    nextPos -- ;
+                }
+                _board.move(col, nextPos, tile);
+                changed = true;
+            }
+        }
+        _board.setViewingPerspective(Side.NORTH);
 
         checkGameOver();
         if (changed) {
