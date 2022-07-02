@@ -115,7 +115,7 @@ public class Model extends Observable {
         int size = _board.size();
         for (int col = 0; col < size; col ++ ) {
             // move all the tiles to make them adjacent
-            for (int row = size - 1; row >= 0; row--) {
+            for (int row = size - 1; row >= 0; row -- ) {
                 Tile t = _board.tile(col, row);
                 if (t != null) {
                     // find nextPos which is null
@@ -124,7 +124,7 @@ public class Model extends Observable {
                         if (_board.tile(col, nextPos) == null) {
                             break;
                         }
-                        nextPos--;
+                        nextPos -- ;
                     }
                     // check if nextPos is a legal position
                     if (nextPos >= row) {
@@ -150,16 +150,17 @@ public class Model extends Observable {
                 }
                 int nextValue = nextTile.value();
                 if (nextValue == curTile.value()) {
+                    // merge the two tiles whose value are equaled
                     _board.move(col, row, nextTile);
                     _score += curTile.value() * 2;
                     // move the tiles behind the two merged tiles to the place where the second tiles was
                     for (int p = nextLine - 1; p >= 0; p -- ) {
-                        Tile tt = _board.tile(col, p);
-                        if (tt == null) {
+                        Tile tile = _board.tile(col, p);
+                        if (tile == null) {
                             break;
                         }
                         if (p < size) {
-                            _board.move(col, p + 1, tt);
+                            _board.move(col, p + 1, tile);
                         }
                     }
                     changed = true;
