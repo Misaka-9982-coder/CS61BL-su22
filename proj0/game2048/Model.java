@@ -115,18 +115,52 @@ public class Model extends Observable {
         int size = _board.size();
         for (int col = 0; col < size; col ++ ) {
             // move all the tiles to make them adjacent
-            for (int row = size - 1; row >= 0; row -- ) {
-                Tile tile = _board.tile(col, row);
-                if(tile == null) continue;
-                int nextPos = 3;
-                while(nextPos >= row) {
-                    if(_board.tile(col, nextPos) == null) {
-                        break;
+            for (int row = size - 1; row >= 0; row--) {
+                Tile t = _board.tile(col, row);
+                if (t != null) {
+                    // find nextPos which is null
+                    int nextPos = 3;
+                    while (nextPos >= row) {
+                        if (_board.tile(col, nextPos) == null) {
+                            break;
+                        }
+                        nextPos--;
                     }
-                    nextPos -- ;
+                    // check if nextPos is a legal position
+                    if (nextPos >= row) {
+                        _board.move(col, nextPos, t);
+                        changed = true;
+                    }
                 }
-                _board.move(col, nextPos, tile);
-                changed = true;
+            }
+
+            // Step2. try to merge
+            // [2, 2, x, x] -> [4, x, x, x]
+            for (int row = 3; row >= 0; row -- ) {
+                Tile curTile = _board.tile(col, row);
+                int nextLine = row - 1;
+                if (nextLine < 0) {
+                    break;
+                }
+                Tile nextTile = _board.tile(col, nextLine);
+                if (curTile == null || nextTile == null) {
+                    break;
+                }
+                int nextValue = nextTile.value();
+                if (nextValue == curTile.value()) {
+                    _board.move(col, row, nextTile);
+                    _score += curTile.value() * 2;
+                    for (int p = nextLine - 1; p >= 0; p -- ) {
+                        Tile tt = _board.tile(col, p);
+                        if (tt == null) {
+                            break;
+                        }
+                        if (p < size) {
+                            _board.move(col, p + 1, tt);
+                        }
+                    }
+                    changed = true;
+                }
             }
         }
         _board.setViewingPerspective(Side.NORTH);
