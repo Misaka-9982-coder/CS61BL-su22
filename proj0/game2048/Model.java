@@ -138,11 +138,13 @@ public class Model extends Observable {
             // [2, 2, x, x] -> [4, x, x, x]
             for (int row = 3; row >= 0; row -- ) {
                 Tile curTile = _board.tile(col, row);
+                // find out the next row's tile
                 int nextLine = row - 1;
                 if (nextLine < 0) {
                     break;
                 }
                 Tile nextTile = _board.tile(col, nextLine);
+                // if one of the two tile is null we break this loop
                 if (curTile == null || nextTile == null) {
                     break;
                 }
@@ -150,6 +152,7 @@ public class Model extends Observable {
                 if (nextValue == curTile.value()) {
                     _board.move(col, row, nextTile);
                     _score += curTile.value() * 2;
+                    // move the tiles behind the two merged tiles to the place where the second tiles was
                     for (int p = nextLine - 1; p >= 0; p -- ) {
                         Tile tt = _board.tile(col, p);
                         if (tt == null) {
