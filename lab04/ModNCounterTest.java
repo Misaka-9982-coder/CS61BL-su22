@@ -11,6 +11,12 @@ class ModNCounterTest {
         assertEquals(1, counter.value());
         counter.increment();
         assertEquals(0, counter.value());
+
+        ModNCounter modNCounter = new ModNCounter(5);
+        for(int i = 0; i < 100;  i ++ ) {
+            assertEquals(i % 5, modNCounter.value());
+            modNCounter.increment();
+        }
     }
 
     @Test
