@@ -1,13 +1,18 @@
-public class Counter {
+public class ModNCounter {
 
     private int myCount;
 
-    public Counter() {
+    private int myMod;
+
+    public ModNCounter(int n) {
         myCount = 0;
+        myMod = n;
     }
 
+
+
     public void increment() {
-        myCount++;
+        myCount = (myCount + 1) % myMod;
     }
 
     public void reset() {
@@ -18,4 +23,7 @@ public class Counter {
         return myCount;
     }
 
+    public int getMyMod() {
+        return myMod;
+    }
 }
