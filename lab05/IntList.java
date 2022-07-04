@@ -157,7 +157,13 @@ public class IntList {
      */
     public int squaredSum() {
         //TODO: YOUR CODE HERE
-        return -1;
+        int sum = 0;
+        IntList current = this;
+        while(current != null) {
+            sum += current.item * current.item;
+            current = current.next;
+        }
+        return sum;
     }
 
     /**
