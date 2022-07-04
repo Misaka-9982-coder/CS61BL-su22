@@ -126,6 +126,12 @@ public class IntList {
      */
     public void add(int value) {
         //TODO: YOUR CODE HERE
+        IntList newNode = new IntList(value);
+        IntList current = this;
+        while(current.next != null) {
+            current = current.next;
+        }
+        current.next = newNode;
     }
 
     /**
