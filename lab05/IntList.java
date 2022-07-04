@@ -73,7 +73,14 @@ public class IntList {
      */
     public String toString() {
         //TODO: YOUR CODE HERE
-        return null;
+        IntList current = this;
+        String result = "";
+        while(current.next != null) {
+            result = result + String.valueOf(current.item) + " ";
+            current = current.next;
+        }
+        result = result + String.valueOf(current.item);
+        return result;
     }
 
     /**
