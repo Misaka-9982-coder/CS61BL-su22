@@ -50,7 +50,19 @@ public class IntList {
      */
     public int get(int position) {
         //TODO: YOUR CODE HERE
-        return -1;
+        if(position < 0) {
+            throw new IllegalArgumentException();
+        }
+        int index = 0;
+        IntList current = this;
+        while(index < position) {
+            if (current.next == null) {
+                throw new IllegalArgumentException();
+            }
+            current = current.next;
+            index++;
+        }
+        return current.item;
     }
 
     /**
