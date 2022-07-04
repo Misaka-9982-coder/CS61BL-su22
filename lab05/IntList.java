@@ -103,8 +103,20 @@ public class IntList {
         IntList otherLst = (IntList) obj;
 
         //TODO: YOUR CODE HERE
+        IntList current = this;
+        while(current != null && otherLst != null) {
+            if (current.item != otherLst.item) {
+                return false;
+            }
+            current = current.next;
+            otherLst = otherLst.next;
+        }
 
-        return false;
+        if (current != null || otherLst != null) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
