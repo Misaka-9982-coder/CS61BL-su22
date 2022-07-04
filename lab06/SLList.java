@@ -70,9 +70,9 @@ public class SLList {
             l1 = l1.next;
             l2 = l2.next;
         }
-	if (l1 != sentinel || l2 != slList.sentinel) {
-		return false;
-	}
+        if (l1 != sentinel || l2 != slList.sentinel) {
+            return false;
+        }
         return true;
     }
 
@@ -122,6 +122,18 @@ public class SLList {
     /** Adds x to the list at the specified index. */
     public void add(int index, int x) {
         // TODO
+        if(index >= size) {
+            index = size;
+        }
+        IntListNode newNode = new IntListNode(x, null);
+        IntListNode p = sentinel;
+        while(index > 0) {
+            p = p.next;
+            index -- ;
+        }
+        newNode.next = p.next;
+        p.next = newNode;
+        size ++ ;
     }
 
     /** Destructively reverses this list. */
