@@ -221,7 +221,13 @@ public class IntList {
      */
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO: YOUR CODE HERE
-        return null;
+        IntList current = A;
+        while(current.next != null) {
+            current = current.next;
+        }
+
+        current.next = B;
+        return A;
     }
 
     /**
@@ -234,6 +240,22 @@ public class IntList {
      */
      public static IntList catenate(IntList A, IntList B) {
         //TODO: YOUR CODE HERE
-        return null;
+         IntList head = new IntList(A.item);
+         IntList current = head;
+         IntList pointer = A.next;
+         IntList prev = A;
+         while(pointer != null) {
+            current.next = new IntList(pointer.item);
+            current = current.next;
+            pointer = pointer.next;
+            prev = current;
+         }
+         pointer = B;
+         while(pointer != null) {
+            prev.next = new IntList(pointer.item);
+            prev = prev.next;
+            pointer = pointer.next;
+         }
+         return head;
      }
 }
