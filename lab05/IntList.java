@@ -141,7 +141,13 @@ public class IntList {
      */
     public int smallest() {
         //TODO: YOUR CODE HERE
-        return -1;
+        IntList current = this;
+        int smallest = current.item;
+        while(current != null) {
+            smallest = Math.min(smallest, current.item);
+            current = current.next;
+        }
+        return smallest;
     }
 
     /**
