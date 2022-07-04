@@ -139,5 +139,12 @@ public class SLList {
     /** Destructively reverses this list. */
     public void reverse() {
         // TODO
+        IntListNode pre = null, cur = sentinel.next;
+        while(cur != null) {
+            IntListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
     }
 }
