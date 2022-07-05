@@ -58,7 +58,12 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public void printDeque() {
-
+        Node curr = head.next;
+        while(curr != tail) {
+            System.out.print(curr.item + " ");
+            curr = curr.next;
+        }
+        System.out.println();
     }
 
     @Override

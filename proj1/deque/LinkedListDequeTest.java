@@ -75,7 +75,9 @@ public class LinkedListDequeTest {
     /** Make sure your LinkedListDeque also works on non-Integer types */
     @Test
     public void multipleParamsTest() {
-
+        Deque<String> slld = new LinkedListDeque<String>();
+        slld.addLast("hello");
+        slld.addLast("world");
     }
     /** Make sure that removing from an empty LinkedListDeque returns null */
     @Test
