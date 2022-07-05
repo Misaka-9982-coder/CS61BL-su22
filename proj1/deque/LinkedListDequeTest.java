@@ -34,18 +34,39 @@ public class LinkedListDequeTest {
 
         lld = new LinkedListDeque<Integer>(); //Assigns lld equal to a new, clean LinkedListDeque!
 		*/
+        lld.addFirst(0);
+        assertFalse("lld should now contain 1 item", lld.isEmpty());
 
+        lld.addLast(1);
+        assertFalse("lld should now contain 2 items", lld.isEmpty());
+
+        lld.addFirst(2);
+        assertFalse("lld should now contain 3 items", lld.isEmpty());
     }
 
     /** Adds an item, removes an item, and ensures that dll is empty afterwards. */
     @Test
     public void addRemoveTest() {
+        lld.addFirst(0);
+        lld.removeFirst();
+        assertTrue("lld should be empty after removing the only item", lld.isEmpty());
 
+        lld.addLast(1);
+        lld.removeLast();
+        assertTrue("lld should be empty after removing the only item", lld.isEmpty());
     }
     /** Make sure that removing from an empty LinkedListDeque does nothing */
     @Test
     public void removeEmptyTest() {
+        lld.removeFirst();
+        assertFalse("lld should be empty after removing the only item", lld.isEmpty());
 
+        lld.removeLast();
+        assertTrue("lld should be empty after removing the only item", lld.isEmpty());
+
+        lld.removeFirst();
+        lld.removeLast();
+        assertTrue("lld should be empty after removing the only item", lld.isEmpty());
     }
     /** Make sure your LinkedListDeque also works on non-Integer types */
     @Test
@@ -55,10 +76,57 @@ public class LinkedListDequeTest {
     /** Make sure that removing from an empty LinkedListDeque returns null */
     @Test
     public void emptyNullReturn() {
-
+        for(int i = 0; i < 100; i ++ ) {
+            assertNull(lld.removeFirst());
+            assertNull(lld.removeLast());
+        }
     }
     /** TODO: Write tests to ensure that your implementation works for really large
      * numbers of elements, and test any other methods you haven't yet tested!
      */
 
+    @Test
+    public void sizeTest() {
+        for(int i = 0; i < 100; i ++ ) {
+            lld.addFirst(i);
+            assertEquals(i + 1, lld.size());
+        }
+    }
+
+    @Test
+    public void printDequeTest() {
+        for(int i = 0; i < 100; i ++ ) {
+            lld.addFirst(i);
+            lld.printDeque();
+        }
+    }
+
+    @Test
+    public void getIndexTest() {
+        for(int i = 0; i < 100; i ++ ) {
+            lld.addLast(i);
+            Integer tmp = i;
+            assertEquals(tmp, lld.get(i));
+        }
+
+        for(int i = 0; i < 100; i ++ ) {
+            lld.addFirst(i);
+            Integer tmp = 99 - i;
+            assertEquals(tmp, lld.get(i));
+        }
+    }
+
+    @Test
+    public void equalsTest() {
+        LinkedListDeque<Integer> lld2 = new LinkedListDeque<Integer>();
+        for(int i = 0; i < 100; i ++ ) {
+            lld.addLast(i);
+            lld2.addLast(i);
+
+            assertTrue(lld.equals(lld2));
+        }
+
+        lld2.addLast(1);
+        assertFalse(lld.equals(lld2));
+    }
 }
