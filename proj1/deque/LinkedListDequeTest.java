@@ -42,6 +42,10 @@ public class LinkedListDequeTest {
 
         lld.addFirst(2);
         assertFalse("lld should now contain 3 items", lld.isEmpty());
+
+        lld.removeFirst();
+        lld.removeFirst();
+        lld.removeFirst();
     }
 
     /** Adds an item, removes an item, and ensures that dll is empty afterwards. */
@@ -59,14 +63,14 @@ public class LinkedListDequeTest {
     @Test
     public void removeEmptyTest() {
         lld.removeFirst();
-        assertFalse("lld should be empty after removing the only item", lld.isEmpty());
+        assertTrue(lld.isEmpty());
 
         lld.removeLast();
-        assertTrue("lld should be empty after removing the only item", lld.isEmpty());
+        assertTrue(lld.isEmpty());
 
         lld.removeFirst();
         lld.removeLast();
-        assertTrue("lld should be empty after removing the only item", lld.isEmpty());
+        assertTrue(lld.isEmpty());
     }
     /** Make sure your LinkedListDeque also works on non-Integer types */
     @Test
@@ -91,6 +95,11 @@ public class LinkedListDequeTest {
             lld.addFirst(i);
             assertEquals(i + 1, lld.size());
         }
+
+        for(int i = 100; i > 0; i -- ) {
+            lld.removeFirst();
+            assertEquals(i - 1, lld.size());
+        }
     }
 
     @Test
@@ -98,6 +107,10 @@ public class LinkedListDequeTest {
         for(int i = 0; i < 100; i ++ ) {
             lld.addFirst(i);
             lld.printDeque();
+        }
+
+        for(int i = 0; i < 100; i ++ ) {
+            lld.removeFirst();
         }
     }
 
@@ -110,9 +123,17 @@ public class LinkedListDequeTest {
         }
 
         for(int i = 0; i < 100; i ++ ) {
+            lld.removeFirst();
+        }
+
+        for(int i = 99; i >= 0; i -- ) {
             lld.addFirst(i);
-            Integer tmp = 99 - i;
-            assertEquals(tmp, lld.get(i));
+            Integer tmp = i;
+            assertEquals(tmp, lld.get(0));
+        }
+
+        for(int i = 0; i < 100; i ++ ) {
+            lld.removeLast();
         }
     }
 
@@ -128,5 +149,9 @@ public class LinkedListDequeTest {
 
         lld2.addLast(1);
         assertFalse(lld.equals(lld2));
+
+        for(int i = 0; i < 100; i ++ ) {
+            lld.removeFirst();
+        }
     }
 }
