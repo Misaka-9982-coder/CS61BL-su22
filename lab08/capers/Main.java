@@ -1,6 +1,7 @@
 package capers;
 
 import java.io.File;
+import java.util.Arrays;
 
 /** Canine Capers: A Gitlet Prelude.
  * @author Sean Dooher
@@ -44,6 +45,7 @@ public class Main {
         if (args.length == 0) {
             exitWithError("Must have at least one argument");
         }
+        System.out.println("args: " + Arrays.toString(args));
         setupPersistence();
         switch (args[0]) {
             case "story":
