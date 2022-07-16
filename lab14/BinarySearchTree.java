@@ -22,6 +22,10 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T> {
     /* Adds a node for KEY iff KEY isn't in the BST already. */
     public void add(T key) {
         // TODO: YOUR CODE HERE
+        if(root == null) {
+            root = new TreeNode(key);
+        }
+        addHelper(null, root, key);
     }
 
     /* Deletes a node from the BST. 
@@ -102,5 +106,22 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T> {
         }
 
         return false;
+    }
+
+    public void addHelper(TreeNode pre, TreeNode curr, T key) {
+        if(curr == null) {
+            curr = new TreeNode(key);
+            if(pre.item.compareTo(key) > 0) {
+                pre.left = curr;
+            } else if(pre.item.compareTo(key) < 0) {
+                pre.right = curr;
+            }
+        }
+
+        if(curr.item.compareTo(key) > 0) {
+            addHelper(curr, curr.left, key);
+        } else if(curr.item.compareTo(key) < 0) {
+            addHelper(curr, curr.right, key);
+        }
     }
 }
