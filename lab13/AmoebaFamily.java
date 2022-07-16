@@ -44,7 +44,7 @@ public class AmoebaFamily implements Iterable<AmoebaFamily.Amoeba> {
 
     /* Returns an Iterator for this AmoebaFamily. */
     public Iterator<Amoeba> iterator() {
-        return new AmoebaBFSIterator(root);
+        return new AmoebaDFSIterator(root);
     }
 
     /* Creates a new AmoebaFamily and prints it out. */
@@ -134,20 +134,34 @@ public class AmoebaFamily implements Iterable<AmoebaFamily.Amoeba> {
     public class AmoebaDFSIterator implements Iterator<Amoeba> {
 
         // Optional TODO: IMPLEMENT THE CLASS HERE
+        Stack<Amoeba> fringe = new Stack<Amoeba>();
 
         /* AmoebaDFSIterator constructor. Sets up all of the initial information
            for the AmoebaDFSIterator. */
-        public AmoebaDFSIterator() {
+        public AmoebaDFSIterator(Amoeba root) {
+            if(root != null) {
+                fringe.push(root);
+            }
         }
 
         /* Returns true if there is a next element to return. */
         public boolean hasNext() {
-            return false;
+            return !fringe.isEmpty();
         }
 
         /* Returns the next element. */
         public Amoeba next() {
-            return null;
+            if(!hasNext()) {
+                throw new java.util.NoSuchElementException();
+            }
+
+            Amoeba node = fringe.pop();
+            if(node.children != null) {
+                for(int i = node.children.size() - 1; i >= 0; i -- ) {
+                    fringe.push(node.children.get(i));
+                }
+            }
+            return node;
         }
 
         public void remove() {
