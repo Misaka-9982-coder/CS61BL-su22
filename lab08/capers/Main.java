@@ -107,9 +107,15 @@ public class Main {
      * If the user inputs an invalid age, call exitWithError()
      * @param args Array in format: {'story', name, breed, age}
      */
-    public static void makeDog(String[] args) {
+    public static void makeDog(String[] args) throws IOException {
         validateNumArgs("dog", args, 4);
         // FIXME
+        String name = args[1];
+        String breed = args[2];
+        int age = Integer.parseInt(args[3]);
+        Dog dog = new Dog(name, breed, age);
+        System.out.println(dog.toString());
+        dog.saveDog();
     }
 
     /**
