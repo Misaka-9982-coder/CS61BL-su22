@@ -12,6 +12,15 @@ public class BinaryTree<T> {
         root = t;
     }
 
+    public BinaryTree(ArrayList<T> pre,  ArrayList<T> in) {
+        root = build(pre, in);
+    }
+
+    private TreeNode build(ArrayList<T> pre, ArrayList<T> in) {
+        // TODO
+        return null;
+    }
+
     /* Print the values in the tree in preorder. */
     public void printPreorder() {
         if (root == null) {
