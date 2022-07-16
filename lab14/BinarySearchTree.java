@@ -25,6 +25,11 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T> {
         if(root == null) {
             root = new TreeNode(key);
         }
+
+        if(contains(key)) {
+            return;
+        }
+
         addHelper(null, root, key);
     }
 

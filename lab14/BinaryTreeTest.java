@@ -20,4 +20,21 @@ public class BinaryTreeTest {
         assertEquals("x in preorder\nC A B E D \nx in inorder\nA B C D E \n\n".trim(),
                      outContent.toString().trim());
     }
+
+    @Test
+    public void testAddKey() {
+        BinarySearchTree<String> x = new BinarySearchTree<String>();
+        x.add("C");
+        x.add("C");
+        x.add("C");
+        x.add("C");
+        x.add("C");
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream oldOut = System.out;
+        System.setOut(new PrintStream(outContent));
+        BinaryTree.print(x, "x");
+        System.setOut(oldOut);
+        assertEquals("x in preorder\nC \nx in inorder\nC \n\n".trim(),
+                outContent.toString().trim());
+    }
 }
