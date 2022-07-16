@@ -17,7 +17,7 @@ public class BinaryTree<T> {
     /* Returns the height of the tree. */
     public int height() {
         // TODO: YOUR CODE HERE
-        return 0;
+        return root.heightHelper(root);
     }
 
     /* Returns true if the tree's left and right children are the same height
@@ -173,5 +173,13 @@ public class BinaryTree<T> {
         }
 
         // TODO: ADD HELPER METHODS HERE
+        private int heightHelper(TreeNode<T> root) {
+            if(root == null) {
+                return 0;
+            }
+            int leftHeight = heightHelper(root.getLeft());
+            int rightHeight = heightHelper(root.getRight());
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
     }
 }
