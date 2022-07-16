@@ -15,4 +15,15 @@ public class AListTest {
         }
         assertEquals(6, count);
     }
+
+    @Test
+    public void testNext() {
+        Integer[] list = new Integer[]{1, 2, 3, 4, 5};
+        AList<Integer> aList = AList.of(list);
+        Integer cnt = 1;
+        for(Integer item : aList) {
+            assertEquals(cnt, item);
+            cnt ++ ;
+        }
+    }
 }

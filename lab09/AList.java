@@ -6,15 +6,15 @@ import java.util.NoSuchElementException;
  * A AList is a list of integers. Like SLList, it also hides the terrible
  * truth of the nakedness within, but uses an array as it's base.
  */
-public class AList<Item> {
+public class AList<Item> implements Iterable<Item> {
 
     private Item[] items;
     private int size;
 
     /** Creates an empty AList. */
     public AList() {
-	items = (Item[]) new Object[8];
-    size = 0;
+        items = (Item[]) new Object[8];
+        size = 0;
     }
 
     /** Returns a AList consisting of the given values. */
@@ -75,4 +75,22 @@ public class AList<Item> {
         return items;
     }
 
+    @Override
+    public Iterator<Item> iterator() {
+        return new AListIterator();
+    }
+
+    private class AListIterator implements Iterator<Item> {
+        private int cur = 0;
+
+        @Override
+        public boolean hasNext() {
+            return cur != size;
+        }
+
+        @Override
+        public Item next() {
+            return items[cur ++ ];
+        }
+    }
 }
