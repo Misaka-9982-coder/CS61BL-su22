@@ -1,3 +1,6 @@
+import edu.princeton.cs.algs4.Queue;
+import edu.princeton.cs.algs4.Stack;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -41,7 +44,7 @@ public class AmoebaFamily implements Iterable<AmoebaFamily.Amoeba> {
 
     /* Returns an Iterator for this AmoebaFamily. */
     public Iterator<Amoeba> iterator() {
-        return new AmoebaDFSIterator();
+        return new AmoebaBFSIterator(root);
     }
 
     /* Creates a new AmoebaFamily and prints it out. */
@@ -158,20 +161,33 @@ public class AmoebaFamily implements Iterable<AmoebaFamily.Amoeba> {
     public class AmoebaBFSIterator implements Iterator<Amoeba> {
 
         // Optional TODO: IMPLEMENT THE CLASS HERE
+        Queue<Amoeba> fringe = new Queue<Amoeba>();
 
         /* AmoebaBFSIterator constructor. Sets up all of the initial information
            for the AmoebaBFSIterator. */
-        public AmoebaBFSIterator() {
+        public AmoebaBFSIterator(Amoeba root) {
+            if(root != null) {
+                fringe.enqueue(root);
+            }
         }
 
         /* Returns true if there is a next element to return. */
         public boolean hasNext() {
-            return false;
+            return !fringe.isEmpty();
         }
 
         /* Returns the next element. */
         public Amoeba next() {
-            return null;
+            if(!hasNext()) {
+                throw new java.util.NoSuchElementException("Amoeba ran out of elements");
+            }
+
+            Amoeba node = fringe.dequeue();
+            for(Amoeba child : node.getChildren()) {
+                fringe.enqueue(child);
+            }
+
+            return node;
         }
 
         public void remove() {
