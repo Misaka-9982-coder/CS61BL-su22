@@ -30,7 +30,17 @@ public class BinaryTree<T> {
     /* Returns a BinaryTree representing the Fibonacci calculation for N. */
     public static BinaryTree<Integer> fibTree(int N) {
         BinaryTree<Integer> result = new BinaryTree<Integer>();
-        return null;
+        if (N == 0) {
+            result.root = new TreeNode<Integer>(0);
+        } else if (N == 1) {
+            result.root = new TreeNode<Integer>(1);
+        } else {
+            result.root = new TreeNode<Integer>(0);
+            result.root.left = fibTree(N - 1).getRoot();
+            result.root.right = fibTree(N - 2).getRoot();
+            result.root.item = (result.root.left.item + result.root.right.item);
+        }
+        return result;
     }
 
     /* Print the values in the tree in preorder: root value first, then values
@@ -59,7 +69,7 @@ public class BinaryTree<T> {
 
     /* Prints out the contents of a BinaryTree with a description in both
        preorder and inorder. */
-    private static void print(BinaryTree t, String description) {
+    public static void print(BinaryTree t, String description) {
         System.out.println(description + " in preorder");
         t.printPreorder();
         System.out.println(description + " in inorder");
@@ -99,16 +109,12 @@ public class BinaryTree<T> {
         print(t, "the empty tree");
         t.sampleTree1();
         print(t, "sample tree 1");
-        System.out.println(t.isCompletelyBalanced());
         t.sampleTree2();
         print(t, "sample tree 2");
-        System.out.println(t.isCompletelyBalanced());
         t.sampleTree3();
         print(t, "sample tree 3");
-        System.out.println(t.isCompletelyBalanced());
         t.sampleTree4();
         print(t, "sample tree 4");
-        System.out.println(t.isCompletelyBalanced());
     }
 
     /* Note: this class is public in this lab for testing purposes. However,
