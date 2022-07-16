@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BinaryTree<T> {
 
@@ -18,7 +20,22 @@ public class BinaryTree<T> {
 
     private TreeNode build(ArrayList<T> pre, ArrayList<T> in) {
         // TODO
-        return null;
+        Map<T, Integer> positionMap = new HashMap<T, Integer>();
+        for (int i = 0; i < pre.size(); i ++ ) {
+            positionMap.put(pre.get(i), i);
+        }
+        return buildHelper(pre, in, 0, pre.size() - 1, 0, in.size() - 1, positionMap);
+    }
+
+    private TreeNode buildHelper(ArrayList<T> pre, ArrayList<T> in, int preStart, int preEnd, int inStart, int inEnd, Map<T, Integer> positionMap) {
+        if (preStart > preEnd) {
+            return null;
+        }
+        int len = positionMap.get(pre.get(preStart)) - inStart;
+        TreeNode root = new TreeNode(pre.get(preStart));
+        root.left = buildHelper(pre, in, preStart + 1, preStart + len, inStart, inStart + len - 1, positionMap);
+        root.right = buildHelper(pre, in, preStart + len + 1, preEnd, inStart + len + 1, inEnd, positionMap);
+        return root;
     }
 
     /* Print the values in the tree in preorder. */
