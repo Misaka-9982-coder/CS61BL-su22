@@ -24,7 +24,7 @@ public class BinaryTree<T> {
        and are themselves completely balanced. */
     public boolean isCompletelyBalanced() {
         // TODO: YOUR CODE HERE
-        return false;
+        return root.isCompletelyBalancedHelper(root);
     }
 
     /* Returns a BinaryTree representing the Fibonacci calculation for N. */
@@ -99,12 +99,16 @@ public class BinaryTree<T> {
         print(t, "the empty tree");
         t.sampleTree1();
         print(t, "sample tree 1");
+        System.out.println(t.isCompletelyBalanced());
         t.sampleTree2();
         print(t, "sample tree 2");
+        System.out.println(t.isCompletelyBalanced());
         t.sampleTree3();
         print(t, "sample tree 3");
+        System.out.println(t.isCompletelyBalanced());
         t.sampleTree4();
         print(t, "sample tree 4");
+        System.out.println(t.isCompletelyBalanced());
     }
 
     /* Note: this class is public in this lab for testing purposes. However,
@@ -180,6 +184,23 @@ public class BinaryTree<T> {
             int leftHeight = heightHelper(root.getLeft());
             int rightHeight = heightHelper(root.getRight());
             return Math.max(leftHeight, rightHeight) + 1;
+        }
+
+        private boolean isCompletelyBalancedHelper(TreeNode<T> root) {
+            if(root == null) {
+                return true;
+            }
+
+            boolean left = isCompletelyBalancedHelper(root.getLeft());
+            boolean right = isCompletelyBalancedHelper(root.getRight());
+
+            int leftHeight = heightHelper(root.getLeft());
+            int rightHeight = heightHelper(root.getRight());
+            if(leftHeight != rightHeight) {
+                return false;
+            }
+
+            return left && right;
         }
     }
 }
