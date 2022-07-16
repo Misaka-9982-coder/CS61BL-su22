@@ -1,6 +1,7 @@
 package capers;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 /** Canine Capers: A Gitlet Prelude.
@@ -11,7 +12,7 @@ public class Main {
     static final File CWD = new File(".");
 
     /** Main metadata folder. */
-    static final File CAPERS_FOLDER = null; // FIXME
+    static final File CAPERS_FOLDER = new File(".capers"); // FIXME
 
     /**
      * Runs one of three commands:
@@ -41,7 +42,7 @@ public class Main {
      *
      * @param args arguments from the command line
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if (args.length == 0) {
             exitWithError("Must have at least one argument");
         }
@@ -52,6 +53,12 @@ public class Main {
                 writeStory(args);
                 break;
             // FIXME
+            case "dog":
+                makeDog(args);
+                break;
+            case "birthday":
+                celebrateBirthday(args);
+                break;
             default:
                 exitWithError(String.format("Unknown command: %s", args[0]));
         }
@@ -68,8 +75,12 @@ public class Main {
      *    - story -- file containing the current story
      *
      */
-    public static void setupPersistence() {
+    public static void setupPersistence() throws IOException {
         // FIXME
+        CAPERS_FOLDER.mkdir();
+        Dog.DOG_FOLDER.mkdir();
+        File file = new File(".capers/story");
+        file.createNewFile();
     }
 
     /**
@@ -80,6 +91,13 @@ public class Main {
     public static void writeStory(String[] args) {
         validateNumArgs("story", args, 2);
         // FIXME
+        String text = args[1];
+        File file = new File(".capers/story");
+        String fileString = Utils.readContentsAsString(file);
+        System.out.println(fileString);
+        System.out.println(text);
+
+        Utils.writeContents(file, fileString + "\n" + text);
     }
 
     /**
