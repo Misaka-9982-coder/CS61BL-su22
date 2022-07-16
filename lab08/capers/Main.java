@@ -125,9 +125,13 @@ public class Main {
      * If the user's input is invalid, call exitWithError()
      * @param args Array in format: {'birthday', name}
      */
-    public static void celebrateBirthday(String[] args) {
+    public static void celebrateBirthday(String[] args) throws IOException {
         validateNumArgs("birthday", args, 2);
         // FIXME
+        String name = args[1];
+        Dog dog = Dog.fromFile(name);
+        dog.haveBirthday();
+        dog.saveDog();
     }
 
     /**
