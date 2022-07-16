@@ -3,6 +3,28 @@ import org.junit.Test;
 public class BinaryTreeTest {
 
     @Test
+    public void testHeight() {
+        BinaryTree t;
+        t = new BinaryTree();
+        t.sampleTree1();
+        BinaryTree.print(t, "sample tree 1");
+        System.out.println("Height of empty tree is " + t.height());
+        System.out.println("================================================");
+        t.sampleTree2();
+        BinaryTree.print(t, "sample tree 2");
+        System.out.println("Height of empty tree is " + t.height());
+        System.out.println("================================================");
+        t.sampleTree3();
+        BinaryTree.print(t, "sample tree 3");
+        System.out.println("Height of empty tree is " + t.height());
+        System.out.println("================================================");
+        t.sampleTree4();
+        BinaryTree.print(t, "sample tree 4");
+        System.out.println("Height of empty tree is " + t.height());
+    }
+
+
+    @Test
     public void testFibTree() {
         BinaryTree<Integer> fibTree;
         fibTree = BinaryTree.fibTree(0);
