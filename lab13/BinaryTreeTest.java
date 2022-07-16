@@ -23,6 +23,26 @@ public class BinaryTreeTest {
         System.out.println("Height of empty tree is " + t.height());
     }
 
+    @Test
+    public void testIsCompletelyBalanced() {
+        BinaryTree t;
+        t = new BinaryTree();
+        t.sampleTree1();
+        BinaryTree.print(t, "sample tree 1");
+        System.out.println("Is tree completely balanced? " + t.isCompletelyBalanced());
+        System.out.println("================================================");
+        t.sampleTree2();
+        BinaryTree.print(t, "sample tree 2");
+        System.out.println("Is tree completely balanced? " + t.isCompletelyBalanced());
+        System.out.println("================================================");
+        t.sampleTree3();
+        BinaryTree.print(t, "sample tree 3");
+        System.out.println("Is tree completely balanced? " + t.isCompletelyBalanced());
+        System.out.println("================================================");
+        t.sampleTree4();
+        BinaryTree.print(t, "sample tree 4");
+        System.out.println("Is tree completely balanced? " + t.isCompletelyBalanced());
+    }
 
     @Test
     public void testFibTree() {
