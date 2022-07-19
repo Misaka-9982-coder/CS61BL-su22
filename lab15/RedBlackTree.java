@@ -77,6 +77,9 @@ public class RedBlackTree<T extends Comparable<T>> {
        and right children. */
     void flipColors(RBTreeNode<T> node) {
         // TODO: YOUR CODE HERE
+        node.isBlack = !node.isBlack;
+        node.left.isBlack = !node.left.isBlack;
+        node.right.isBlack = !node.right.isBlack;
     }
 
     /* Rotates the given node NODE to the right. Returns the new root node of
