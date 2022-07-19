@@ -117,19 +117,30 @@ public class RedBlackTree<T extends Comparable<T>> {
         if (comp == 0) {
             return node; // do nothing.
         } else if (comp < 0) {
+            // continue to search the left
             node.left = insert(node.left, item);
         } else {
+            // continue to search the right
             node.right = insert(node.right, item);
         }
 
         // handle "middle of three" and "right-leaning red" structures
+        if (isRed(node.right) && !isRed(node.left)) {
+            node = rotateLeft(node);
+        }
 
         // handle "smallest of three" structure
+        if (isRed(node.left) && isRed(node.left.left)) {
+            node = rotateRight(node);
+        }
         
         // handle "largest of three" structure
-        
+        if (isRed(node.left) && isRed(node.right)) {
+            flipColors(node);
+        }
+
         // TODO: YOUR CODE HERE
-        return null; //fix this return statement
+        return node; //fix this return statement
     }
 
     /* Returns whether the given node NODE is red. Null nodes (children of leaf
