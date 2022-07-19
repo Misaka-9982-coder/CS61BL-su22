@@ -71,4 +71,37 @@ public class TestMyTrieSet {
              assertFalse(keys.contains(s));
          }
     }
+
+    @Test
+    public void testLongestPrefix() {
+        MyTrieSet t = new MyTrieSet();
+        t.add("same");
+        t.add("sam");
+        t.add("sad");
+        t.add("sap");
+        assertEquals("same", t.longestPrefixOf("same"));
+        assertEquals("sam", t.longestPrefixOf("sam"));
+        assertEquals("sad", t.longestPrefixOf("sad"));
+        assertEquals("sap", t.longestPrefixOf("sap"));
+        assertEquals("", t.longestPrefixOf(""));
+        assertEquals("", t.longestPrefixOf("a"));
+        assertEquals("", t.longestPrefixOf("ab"));
+        assertEquals("", t.longestPrefixOf("abc"));
+        assertEquals("", t.longestPrefixOf("abcd"));
+        assertEquals("", t.longestPrefixOf("abcde"));
+        assertEquals("", t.longestPrefixOf("abcdef"));
+        assertEquals("", t.longestPrefixOf("abcdefg"));
+        assertEquals("", t.longestPrefixOf("abcdefgh"));
+        assertEquals("", t.longestPrefixOf("abcdefghi"));
+        assertEquals("", t.longestPrefixOf("abcdefghij"));
+        assertEquals("", t.longestPrefixOf("abcdefghijk"));
+        assertEquals("", t.longestPrefixOf("abcdefghijkl"));
+        assertEquals("", t.longestPrefixOf("abcdefghijklm"));
+        assertEquals("", t.longestPrefixOf("abcdefghijklmn"));
+        assertEquals("", t.longestPrefixOf("abcdefghijklmno"));
+        assertEquals("", t.longestPrefixOf("abcdefghijklmnop"));
+        assertEquals("", t.longestPrefixOf("abcdefghijklmnopq"));
+        assertEquals("sa", t.longestPrefixOf("sabsad"));
+        assertEquals("s", t.longestPrefixOf("ssbsad"));
+    }
 }

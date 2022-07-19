@@ -1,7 +1,5 @@
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class MyTrieSet implements TrieSet61BL {
 
@@ -119,6 +117,24 @@ public class MyTrieSet implements TrieSet61BL {
 
     @Override
     public String longestPrefixOf(String key) {
-        return null;
+        int index = 0;
+        TrieNode node = root;
+
+        while(index < key.length()) {
+            int c = key.charAt(index) - 'a';
+
+            if(node.children.get(c) == null) {
+                return key.substring(0, index);
+            }
+
+            if(index == key.length() - 1) {
+                return node.children.get(c).word;
+            }
+
+            node = node.children.get(c);
+            index ++ ;
+        }
+
+        return "";
     }
 }
