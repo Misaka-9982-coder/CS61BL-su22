@@ -86,14 +86,18 @@ public class RedBlackTree<T extends Comparable<T>> {
        this subtree. */
     RBTreeNode<T> rotateRight(RBTreeNode<T> node) {
         // TODO: YOUR CODE HERE
-        return null;
+        RBTreeNode<T> newRight = new RBTreeNode<T>(false, node.item, node.left.right, node.right);
+        node = new RBTreeNode<T>(true, node.left.item, node.left.left, newRight);
+        return node;
     }
 
     /* Rotates the given node NODE to the left. Returns the new root node of
        this subtree. */
     RBTreeNode<T> rotateLeft(RBTreeNode<T> node) {
         // TODO: YOUR CODE HERE
-        return null;
+        RBTreeNode<T> newLeft = new RBTreeNode<T>(false, node.item, node.left, node.right.left);
+        node = new RBTreeNode<T>(true, node.right.item, newLeft, node.right.right);
+        return node;
     }
 
     public void insert(T item) {
