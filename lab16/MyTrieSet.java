@@ -32,13 +32,18 @@ public class MyTrieSet implements TrieSet61BL {
     public boolean contains(String key) {
         int index = 0;
         TrieNode node = root;
+
         while(index < key.length()) {
             int c = key.charAt(index) - 'a';
+
             if(node.children.get(c) == null) {
                 return false;
-            } else if (node.isWord) {
-                return true;
             }
+
+            if(index == key.length() - 1) {
+                return node.children.get(c).isWord;
+            }
+
             node = node.children.get(c);
             index ++ ;
         }
@@ -51,20 +56,65 @@ public class MyTrieSet implements TrieSet61BL {
         TrieNode node = root;
         while(index < key.length()) {
             int c = key.charAt(index) - 'a';
+
             if(node.children.get(c) == null) {
                 node.children.put(c, new TrieNode());
             }
+
+            if(index == key.length() - 1) {
+                node.children.get(c).isWord = true;
+                node.children.get(c).word = key;
+            }
+
             index ++ ;
+            node = node.children.get(c);
         }
-        node.isWord = true;
-        node.word = key;
     }
 
     @Override
     public List<String> keysWithPrefix(String prefix) {
         List<String> result = new java.util.ArrayList<>();
+        int index = 0;
+        TrieNode node = root;
 
+        System.out.println("root children size : " + root.children.size());
+
+        while(index < prefix.length()) {
+            int c = prefix.charAt(index) - 'a';
+
+            char ch = (char) (c + 'a');
+
+            node = node.children.get(c);
+            index ++ ;
+
+            System.out.println("node children size : " + node.children.size() + " char : " + ch);
+
+            if(index == prefix.length()) {
+                for(TrieNode child : node.children.values()) {
+                    DFSChild(child, result);
+                }
+                break;
+            }
+        }
+
+        System.out.println("result: " + result);
         return result;
+    }
+
+    String DFSChild(TrieNode node, List<String> result) {
+        if(node == null) {
+            return "";
+        }
+
+        if(node.isWord) {
+            result.add(node.word);
+        }
+
+        for(TrieNode child : node.children.values()) {
+            return DFSChild(child, result);
+        }
+
+        return "";
     }
 
     @Override

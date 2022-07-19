@@ -31,37 +31,44 @@ public class TestMyTrieSet {
          MyTrieSet t = new MyTrieSet();
          assertFalse(t.contains("waterYouDoingHere"));
          t.add("waterYouDoingHere");
+         t.contains("waterYouDoingHere");
          assertTrue(t.contains("waterYouDoingHere"));
     }
 
     @Test
     public void basicAddTest() {
-         MyTrieSet t = new MyTrieSet();
-         assertFalse(t.contains("waterYouDoingHere"));
-         t.add("waterYouDoingHere");
-         assertTrue(t.contains("waterYouDoingHere"));
+        MyTrieSet t = new MyTrieSet();
+        String[] saStrings = new String[]{"same", "sam", "sad", "sap"};
+        for (String s: saStrings) {
+            t.add(s);
+        }
+
+        for (String s: saStrings) {
+             assertTrue(t.contains(s));
+         }
+
     }
 
     // assumes add works
     @Test
     public void basicPrefixTest() {
-//         String[] saStrings = new String[]{"same", "sam", "sad", "sap"};
-//         String[] otherStrings = new String[]{"a", "awls", "hello"};
-//
-//         MyTrieSet t = new MyTrieSet();
-//         for (String s: saStrings) {
-//             t.add(s);
-//         }
-//         for (String s: otherStrings) {
-//             t.add(s);
-//         }
-//
-//         List<String> keys = t.keysWithPrefix("sa");
-//         for (String s: saStrings) {
-//             assertTrue(keys.contains(s));
-//         }
-//         for (String s: otherStrings) {
-//             assertFalse(keys.contains(s));
-//         }
+         String[] saStrings = new String[]{"same", "sam", "sad", "sap"};
+         String[] otherStrings = new String[]{"a", "awls", "hello"};
+
+         MyTrieSet t = new MyTrieSet();
+         for (String s: saStrings) {
+             t.add(s);
+         }
+         for (String s: otherStrings) {
+             t.add(s);
+         }
+
+         List<String> keys = t.keysWithPrefix("sa");
+         for (String s: saStrings) {
+             assertTrue(keys.contains(s));
+         }
+         for (String s: otherStrings) {
+             assertFalse(keys.contains(s));
+         }
     }
 }
