@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Queue;
 
-public class HashMap <K, V> implements Map61BL<K, V> {
+public class HashMap <K, V> implements Map61BL<K, V>, Iterable<K> {
 
     /* TODO: Instance variables here */
 
@@ -130,10 +131,40 @@ public class HashMap <K, V> implements Map61BL<K, V> {
 
     @Override
     public Iterator<K> iterator() {
-        return null;
+        return new HashMapIterator<K>();
     }
 
-    private static class Entry<K, V> {
+    private class HashMapIterator<K> implements Iterator<K> {
+
+        int cnt;
+        int cur = 0;
+        public HashMapIterator() {
+            cnt = 0;
+            cur = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return cnt < size;
+        }
+
+        @Override
+        public K next() {
+            if(!hasNext()) {
+                throw new java.util.NoSuchElementException();
+            }
+
+            while (HashTable[cur] == null) {
+                cur = (cur + 1) % capacity;
+            }
+            K res = (K) HashTable[cur].key;
+            cur ++ ;
+            cnt ++ ;
+            return res;
+        }
+    }
+
+    public static class Entry<K, V> {
 
         private K key;
         private V value;
