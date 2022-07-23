@@ -98,6 +98,13 @@ public class HashMap <K, V> implements Map61BL<K, V> {
 
     @Override
     public V remove(K key) {
+        int index = hashCode(key);
+        if(HashTable[index] != null && HashTable[index].key == key) {
+            V value = (V) HashTable[index].value;
+            HashTable[index] = null;
+            this.size -- ;
+            return value;
+        }
         return null;
     }
 
