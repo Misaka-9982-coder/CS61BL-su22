@@ -27,7 +27,7 @@ public class HashMap <K, V> implements Map61BL<K, V> {
     public HashMap(int capacity) {
         this.size = 0;
         this.capacity = capacity;
-        this.loadFactor = 1;
+        this.loadFactor = 0.75;
         HashTable = new Entry[capacity];
     }
 
@@ -71,18 +71,28 @@ public class HashMap <K, V> implements Map61BL<K, V> {
     @Override
     public V get(K key) {
         int index = hashCode(key);
+        Entry entry = HashTable[index];
+        if (entry == null) {
+            return null;
+        }
         return (V) HashTable[index].value;
     }
 
     @Override
     public void put(K key, V value) {
-        if (size >= capacity * loadFactor) {
+        if (size >= Math.floor(capacity * loadFactor)) {
             resize();
         }
+
         int index = hashCode(key);
         Entry entry = new Entry(key, value);
+
+        V v = get(key);
+        if (v == null) {
+            this.size ++ ;
+        }
+
         HashTable[index] = entry;
-        this.size ++ ;
     }
 
     public void resize() {
