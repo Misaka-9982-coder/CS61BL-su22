@@ -54,7 +54,9 @@ public class HashMap <K, V> implements Map61BL<K, V> {
 
     @Override
     public void clear() {
-
+        this.size = 0;
+        this.capacity = 16;
+        HashTable = new Entry[16];
     }
 
     @Override
